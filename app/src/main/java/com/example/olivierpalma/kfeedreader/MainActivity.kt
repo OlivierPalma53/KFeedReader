@@ -1,5 +1,6 @@
 package com.example.olivierpalma.kfeedreader
 
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pkmmte.pkrss.Article
@@ -26,9 +27,11 @@ class MainActivity : AppCompatActivity(), Callback{
     }
 
     override fun onLoaded(newArticles: MutableList<Article>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        newArticles?.mapTo(listItens){
+            Item(it.title, it.author, it.date, it.source, it.enclosure.url)
+        }
     }
 
-    data class Item(val titulo: String, val autor: String, val data: Long, val imagem: String)
+    data class Item(val titulo: String, val autor: String, val data: Long, val link: Uri, val imagem: String)
 
 }
